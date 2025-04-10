@@ -1,0 +1,116 @@
+{
+  "endpoints": [
+    {
+      "modelName": "Song",
+      "path": "api/songs",
+      "entity": [
+        {
+          "columnName": "Id",
+          "columnType": "int"
+        },
+        {
+          "columnName": "Title",
+          "columnType": "string"
+        },
+        {
+          "columnName": "ArtistId",
+          "columnType": "int"
+        },
+        {
+          "columnName": "AlbumId",
+          "columnType": "int"
+        },
+        {
+          "columnName": "Duration",
+          "columnType": "TimeSpan"
+        },
+        {
+          "columnName": "ReleaseDate",
+          "columnType": "DateTime"
+        }
+      ]
+    },
+    {
+      "modelName": "Album",
+      "path": "api/albums",
+      "entity": [
+        {
+          "columnName": "Id",
+          "columnType": "int"
+        },
+        {
+          "columnName": "Title",
+          "columnType": "string"
+        },
+        {
+          "columnName": "ArtistId",
+          "columnType": "int"
+        },
+        {
+          "columnName": "ReleaseDate",
+          "columnType": "DateTime"
+        },
+        {
+          "columnName": "GenreId",
+          "columnType": "int"
+        }
+      ]
+    },
+    {
+      "modelName": "Artist",
+      "path": "api/artists",
+      "entity": [
+        {
+          "columnName": "Id",
+          "columnType": "int"
+        },
+        {
+          "columnName": "Name",
+          "columnType": "string"
+        },
+        {
+          "columnName": "Bio",
+          "columnType": "string"
+        },
+        {
+          "columnName": "Founded",
+          "columnType": "DateTime"
+        },
+        {
+          "columnName": "IsActive",
+          "columnType": "bool"
+        }
+      ]
+    },
+    {
+      "modelName": "Playlist",
+      "path": "api/playlists",
+      "entity": [
+        {
+          "columnName": "Id",
+          "columnType": "int"
+        },
+        {
+          "columnName": "Name",
+          "columnType": "string"
+        },
+        {
+          "columnName": "UserId",
+          "columnType": "int"
+        },
+        {
+          "columnName": "SongIds",
+          "columnType": "List<int>"
+        },
+        {
+          "columnName": "IsPublic",
+          "columnType": "bool"
+        },
+        {
+          "columnName": "CreatedAt",
+          "columnType": "DateTime"
+        }
+      ]
+    }
+  ]
+}
