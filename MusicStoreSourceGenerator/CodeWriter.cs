@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using Microsoft.CodeAnalysis;
 
 namespace MusicStoreRepositoryGenerator
 {
@@ -10,49 +7,40 @@ namespace MusicStoreRepositoryGenerator
     {
         public static string GenerateModelClass(string modelName, List<EntityColumn> columns)
         {
-            var propertiesCode = new StringBuilder();
-
+            var builder = new StringBuilder()
+            .AppendLine("using System;")
+            .AppendLine()
+            .AppendLine("namespace MusicStore.Models")
+            .AppendLine("{")
+            .AppendLine($"    public class {modelName}Http : HttpEntity")
+            .AppendLine("    {");
             foreach (var column in columns)
             {
-                propertiesCode.AppendLine($"    public {column.ColumnType} {column.ColumnName} {{ get; set; }}");
+                builder.AppendLine($@"         public {column.ColumnType} {column.ColumnName} {{ get; set; }}");
             }
 
-            return $@"
-        using System;
-        using System.Collections.Generic;
-        using System.Text.Json.Serialization;
+            builder.AppendLine("    }");
+            builder.AppendLine("}");
 
-        namespace MusicStore.Models
-        {{
-            public class {modelName}
-            {{
-        {propertiesCode}
-            }}
-        }}";
+
+            return builder.ToString();
         }
 
         public static string GenerateRepositoryClass(string modelName, string apiPath, List<EntityColumn> columns)
         {
-            // Намираме колоната, която е Id
-            var idColumn = columns.FirstOrDefault(c => c.ColumnName.Equals("Id", StringComparison.OrdinalIgnoreCase));
-            string idType = idColumn?.ColumnType ?? "int";
+            var builder = new StringBuilder()
+            .AppendLine("using System;")
+            .AppendLine("using MusicStore.Models;")
+            .AppendLine()
+            .AppendLine("namespace MusicStore.Repositories")
+            .AppendLine("{")
+            .AppendLine($"    public class {modelName}HttpRepository : HttpRepository<{modelName}>")
+            .AppendLine("    {")
+            .AppendLine($"        public override string ApiPath => \"{apiPath}\";")
+            .AppendLine("    }")
+            .AppendLine("}");
 
-            return $@"
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using MusicStore.Models;
-
-namespace MusicStore.Repositories
-{{
-    public class {modelName}Repository : HttpRepository<{modelName}>
-    {{
-        public override string ApiPath => ""{apiPath}"";
-    }}
-}}";
+            return builder.ToString();
         }
     }
 }

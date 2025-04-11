@@ -1,15 +1,13 @@
-﻿namespace MusicStore.Repositories
+﻿using System;
+using System.Collections.Generic;
+using MusicStore.Models;
+
+namespace MusicStore.Repositories
 {
-    public abstract class HttpRepository<T> where T : class
+    public abstract class HttpRepository<T> where T : HttpEntity
     {
-        protected readonly HttpClient _httpClient;
 
         public abstract string ApiPath { get; }
-
-        protected HttpRepository(HttpClient httpClient)
-        {
-            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        }
 
         public virtual T GetItem(int id)
         {

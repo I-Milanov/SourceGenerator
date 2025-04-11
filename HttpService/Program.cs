@@ -1,6 +1,5 @@
-﻿using System;
+﻿using MusicStore.Models;
 using MusicStore.Repositories;
-using MusicStore.Mode;
 
 namespace MusicStoreSourceGenerator
 {
@@ -8,9 +7,7 @@ namespace MusicStoreSourceGenerator
     {
         static void Main(string[] args)
         {
-         
-          
-            Console.WriteLine("Hello World!");
+            var test = new AlbumHttp();
         }
     }
 }
